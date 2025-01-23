@@ -1,2 +1,2 @@
 # umr-visualizer
-Python visualization package for unified mete regression models
+Python visualization package for unified meta regression models
