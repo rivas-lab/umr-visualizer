@@ -54,31 +54,32 @@ uv.plot_proportion_variance_explained(df, fitted_values_full)
 The package follows the **meta-regression framework**:
 
 1. **Weighted Mean**  
-   \[
+   $$
    \bar{y}_w = \frac{\sum w_i y_i}{\sum w_i}
-   \]
-   where \( w_i = \frac{1}{SE_{\beta_i}^2} \).
+   $$
+   where $ w_i = \frac{1}{SE_{\beta_i}^2} $.
 
 2. **Total Sum of Squares (SST)**  
-   \[
+   $$
    SST = \sum w_i (y_i - \bar{y}_w)^2
-   \]
+   $$
 
 3. **Sum of Squared Residuals (SSR_full & SSR_reduced)**  
-   \[
+   $$
    SSR_{\text{full}} = \sum w_i (y_i - \hat{y}_i)^2
-   \]
-   \[
+   $$
+   
+   $$
    SSR_{\text{reduced}, j} = \sum w_i (y_i - \hat{y}_i^{\text{reduced}})^2
-   \]
+   $$
 
-4. **Proportion of Variance Explained**  
-   \[
+5. **Proportion of Variance Explained**  
+   $$
    R^2_j = \frac{SSR_{\text{reduced}, j} - SSR_{\text{full}}}{SSR_{\text{reduced}, j}}
-   \]
-   \[
+   $$
+   $$
    \text{Proportion}_j = \frac{R^2_j}{R^2_{\text{total}}}
-   \]
+   $$
 
 ## **Directory Structure**
 ```
