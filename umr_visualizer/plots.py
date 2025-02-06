@@ -39,7 +39,7 @@ def plot_proportion_variance_explained(table, fitted_values):
 
 
 
-def plot2_proportion_variance_explained(table, fitted_values):
+def sns_proportion_variance_explained(table, fitted_values):
     """
     Create a barplot of the proportion of variance explained per moderator and the full model.
     """
@@ -80,7 +80,7 @@ def plot2_proportion_variance_explained(table, fitted_values):
     plt.show()
 
 
-def plot3_proportion_variance_explained(table, fitted_values):
+def sns2_proportion_variance_explained(table, fitted_values):
     """
     Create a horizontal bar plot of the proportion of variance explained per moderator and the full model,
     with labels displayed inside the bars.
@@ -121,35 +121,6 @@ def plot3_proportion_variance_explained(table, fitted_values):
 
 
 def plotly_variance_explained(table, fitted_values):
-    # """
-    # Create an interactive horizontal bar chart using Plotly.
-    # """
-    # # Identify moderator columns
-    # moderators = [col for col in table.columns if col.startswith("Mod")]
-
-    # # Compute R² for the full model
-    # ssr_full = stats.ssr_mod_all(table, fitted_values)
-    # sst_value = stats.sst_all(table)
-    # r_squared_full = 1 - (ssr_full / sst_value)
-
-    # # Store variance explained in dictionary
-    # variance_explained = {mod: stats.proportion_variance_explained(table, fitted_values, mod) for mod in moderators}
-    # variance_explained = {"Full Model": r_squared_full, **variance_explained}  # Ensure Full Model is first
-
-    # # Convert to DataFrame
-    # df = pd.DataFrame(variance_explained.items(), columns=["Moderator", "Proportion Explained"])
-    # df["Proportion Explained"] *= 100  # Convert to percentage
-
-    # # Create interactive horizontal bar plot
-    # fig = px.bar(df, x="Proportion Explained", y="Moderator", text="Proportion Explained",
-    #              title="Proportion of Variance Explained per Moderator and Full Model",
-    #              labels={"Proportion Explained": "Proportion of Variance Explained (%)"},
-    #              orientation='h', color="Proportion Explained", color_continuous_scale="blues")
-
-    # fig.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
-    # fig.update_layout(xaxis=dict(range=[0, 100]), yaxis=dict(categoryorder="total descending"), template="plotly_white")
-
-    # fig.show()
     """
     Create an interactive horizontal bar chart using Plotly with the Full Model placed first and visually separated.
     """

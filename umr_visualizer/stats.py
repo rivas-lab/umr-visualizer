@@ -36,8 +36,7 @@ def ssr_mod_all(table, fitted_values):
     Returns:
         float: The SSR value.
     """
-
-    # TO DO : add option wih no fitted values 
+    
     # Extract y values (Beta) and weights
     y = table['Beta'].values
     w = 1 / (table['SE'].values ** 2)
