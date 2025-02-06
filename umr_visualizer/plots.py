@@ -79,7 +79,6 @@ def sns_proportion_variance_explained(table, fitted_values):
 
     plt.show()
 
-
 def sns2_proportion_variance_explained(table, fitted_values):
     """
     Create a horizontal bar plot of the proportion of variance explained per moderator and the full model,

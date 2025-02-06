@@ -53,7 +53,28 @@ moderators = ["Mod_1", "Mod_2", "Mod_3"]
 
 # Compute proportions of variance explained example
 proportions = uv.proportion_variance_explained(df, fitted_values, "Mod1")
+
+```python
+uv.plot_proportion_variance_explained(df, fitted_values_full)
 ```
+![Variance Explained Matplotlib bar plot](images/output_plt.png)
+
+```python
+uv.sns_proportion_variance_explained(df, fitted_values_full)
+```
+![Variance Explained Seaborn bar plot](images/output_sns.png)
+
+```python
+uv.sns2_proportion_variance_explained(df, fitted_values_full)
+```
+![Variance Explained Seaborn bar plot inversed ](images/output_sns2.png)
+
+```python
+uv.plotly_variance_explained(df, fitted_values_full)
+```
+
+![Variance Explained Plotly bar plot ](images/output_plotly.png)
+
 
 ### **4. Plot Proportions**
 
