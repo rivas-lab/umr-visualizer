@@ -57,23 +57,23 @@ proportions = uv.proportion_variance_explained(df, fitted_values, "Mod1")
 ```python
 uv.plot_proportion_variance_explained(df, fitted_values_full)
 ```
-![Variance Explained Matplotlib bar plot](images/output_plt.png)
+<img src="images/output_plt.png" alt="Variance Explained Matplotlib bar plot" width="400">
 
 ```python
 uv.sns_proportion_variance_explained(df, fitted_values_full)
 ```
-![Variance Explained Seaborn bar plot](images/output_sns.png)
+<img src="images/output_sns.png" alt="Variance Explained Seaborn bar plot" width="400">
 
 ```python
 uv.sns2_proportion_variance_explained(df, fitted_values_full)
 ```
-![Variance Explained Seaborn bar plot inversed ](images/output_sns2.png)
+<img src="images/output_sns2.png" alt="Variance Explained Seaborn bar plot inversed" width="400">
 
 ```python
 uv.plotly_variance_explained(df, fitted_values_full)
 ```
+<img src="images/output_plotly.png" alt="Variance Explained Plotly bar plot inversed" width="400">
 
-![Variance Explained Plotly bar plot ](images/output_plotly.png)
 
 
 ### **4. Plot Proportions**
