@@ -74,7 +74,7 @@ def plot_proportion_variance_explained(table, fitted_values, gene_filter=None):
         plt.show()
 
     
-# To be modified to creates plots per gene too
+
 def sns_proportion_variance_explained(table, fitted_values):
     """
     Create a barplot of the proportion of variance explained per moderator and the full model.
