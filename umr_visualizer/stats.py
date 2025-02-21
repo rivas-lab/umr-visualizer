@@ -12,8 +12,8 @@ def sst_all(table):
     Returns:
         float: The SST value.
     """
-    # Extract y values (Beta) and weights (wi = 1 / SE^2)
-    y = table['Beta'].values
+    # Extract y values (BETA) and weights (wi = 1 / SE^2)
+    y = table['BETA'].values
     w = 1 / (table['SE'].values ** 2)
 
     # Compute the weighted mean of y
@@ -30,7 +30,7 @@ def ssr_mod_all(table, fitted_values):
     Compute the sum of squares for regression (SSR) using all moderators.
     
     Parameters:
-        table (pd.DataFrame): The dataset containing 'Beta' and 'SE' columns.
+        table (pd.DataFrame): The dataset containing 'BETA' and 'SE' columns.
         fitted_values (np.array): The predicted y-values (fitted values).
     
     Returns:
@@ -38,7 +38,7 @@ def ssr_mod_all(table, fitted_values):
     """
     
     # Extract y values (Beta) and weights
-    y = table['Beta'].values
+    y = table['BETA'].values
     w = 1 / (table['SE'].values ** 2)
 
     # Compute SSR
@@ -53,7 +53,7 @@ def ssr_mod_reduced(table, fitted_values, mod):
     Compute the SSR after removing a specific moderator.
     
     Parameters:
-        table (pd.DataFrame): The dataset containing 'Beta', 'SE', and moderator columns.
+        table (pd.DataFrame): The dataset containing 'BETA', 'SE', and moderator columns.
         fitted_values (np.array): The predicted y-values (fitted values) using all moderators.
         mod (str): The column name of the moderator to remove.
     
@@ -61,17 +61,30 @@ def ssr_mod_reduced(table, fitted_values, mod):
         float: The SSR value after removing the moderator.
     """
     # Create a reduced model by removing the specified moderator
-    predictors = [col for col in table.columns if col.startswith("Mod") and col != mod]
+    # Find the index of "SE" and select all columns that come after it
+    se_index = table.columns.get_loc("SE") 
+    moderators = table.columns[se_index + 1 :].tolist()  
+    predictors = [col for col in moderators if col != mod]
     
     # Fit a new regression model without the removed moderator
     X_reduced = table[predictors].values  # Extract remaining moderators
-    y = table['Beta'].values
+    y = table['BETA'].values
     w = 1 / (table['SE'].values ** 2)
 
     # Compute new fitted values (β*X_reduced)
-    W = np.diag(w)
-    beta_reduced = np.linalg.inv(X_reduced.T @ W @ X_reduced) @ X_reduced.T @ W @ y
-    fitted_values_reduced = np.dot(X_reduced, beta_reduced)
+    # W = np.diag(w)
+    # Compute weighted X_reduced.T without constructing a large W matrix
+    X_w_reduced = X_reduced.T * w  # Equivalent to X_reduced.T @ np.diag(w)
+
+    # Compute the matrix to invert
+    matrix_to_invert_reduced = X_w_reduced @ X_reduced  # Equivalent to X_reduced.T @ np.diag(w) @ X_reduced
+
+    # Invert the matrix safely
+    inv_matrix_reduced = np.linalg.pinv(matrix_to_invert_reduced)  # Ensure it's invertible
+
+    # Compute the final BETA_reduced
+    BETA_reduced = inv_matrix_reduced @ (X_w_reduced @ y)  # Equivalent to np.linalg.inv(X_reduced.T @ np.diag(w) @ X_reduced) @ (X_reduced.T @ np.diag(w) @ y)
+    fitted_values_reduced = np.dot(X_reduced, BETA_reduced)
 
     # Compute SSR for the reduced model
     ssr_reduced_value = np.sum(w * (y - fitted_values_reduced) ** 2)
@@ -83,7 +96,7 @@ def proportion_variance_explained_per_gene(table, fitted_values, mod, gene_filte
     Compute the proportion of variance explained by a given moderator.
     
     Parameters:
-        table (pd.DataFrame): The dataset containing 'Beta', 'SE', and moderator columns.
+        table (pd.DataFrame): The dataset containing 'BETA', 'SE', and moderator columns.
         mod (str): The column name of the moderator for which to compute R².
         fitted_values (np.array): The predicted y-values using all moderators.
         gene_filter (list of strings, optional): List of gene names to filter the analysis.
@@ -93,22 +106,22 @@ def proportion_variance_explained_per_gene(table, fitted_values, mod, gene_filte
     """
 
     results = []
-    unique_genes = table['Gene'].unique() if gene_filter is None else gene_filter
+    unique_genes = table['gene'].unique() if gene_filter is None else gene_filter
 
     for gene in unique_genes:
 
         # Subset data for the gene
-        gene_data = table[table['Gene'] == gene].copy()
+        gene_data = table[table['gene'] == gene].copy()
 
         # Extract corresponding fitted values for the gene
-        gene_fitted_values = fitted_values[table['Gene'] == gene]
+        gene_fitted_values = fitted_values[table['gene'] == gene]
 
         # Compute SSR for full model
         ssr_full = ssr_mod_all(gene_data, gene_fitted_values)
 
         # Compute SST
         sst = sst_all(gene_data)
-
+        
         # Compute R_squared for the full model
         r_squared_full = 1 - (ssr_full / sst)
 
@@ -120,6 +133,6 @@ def proportion_variance_explained_per_gene(table, fitted_values, mod, gene_filte
   
         gene_prop = r_squared_j / r_squared_full
 
-        results.append({'Gene': gene, 'Proportion_Variance_Explained': gene_prop})
+        results.append({'gene': gene, 'Proportion_Variance_Explained': gene_prop})
     
     return pd.DataFrame(results) 

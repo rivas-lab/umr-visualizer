@@ -51,36 +51,33 @@ Your dataset should be structured as follows:
 # Define moderators
 moderators = ["Mod_1", "Mod_2", "Mod_3"]
 
-# Compute proportions of variance explained example
-proportions = uv.proportion_variance_explained(df, fitted_values, "Mod1")
+# Compute proportions of variance explained example per moderator for a collection of genes
+prop_red = uv.proportion_variance_explained_per_gene(df, fitted_values_full,"Mod1", ['Gene1', 'Gene2'])
+
+
+
+### **4. Plot Proportions explained for a list genes **
 
 ```python
-uv.plot_proportion_variance_explained(df, fitted_values_full)
+uv.plot_proportion_variance_explained(df, fitted_values_full,"matplotlib" , ['Gene1', 'Gene2'])
 ```
 ![Variance Explained Matplotlib bar plot](images/output_plt.png)
 
 ```python
-uv.sns_proportion_variance_explained(df, fitted_values_full)
+uv.plot_proportion_variance_explained(df, fitted_values_full,"seaborn" , ['Gene1', 'Gene2'])
 ```
 ![Variance Explained Seaborn bar plot](images/output_sns.png)
 
-```python
+<!-- ```python
 uv.sns2_proportion_variance_explained(df, fitted_values_full)
 ```
-![Variance Explained Seaborn bar plot inversed ](images/output_sns2.png)
+![Variance Explained Seaborn bar plot inversed ](images/output_sns2.png) -->
 
 ```python
-uv.plotly_variance_explained(df, fitted_values_full)
+uv.plot_proportion_variance_explained(df, fitted_values_full,"plotly" , ['Gene1', 'Gene2'])
 ```
 
 ![Variance Explained Plotly bar plot ](images/output_plotly.png)
-
-
-### **4. Plot Proportions**
-
-```python
-uv.plot_proportion_variance_explained(df, fitted_values_full)
-```
 
 ## **Methods & Equations**
 
