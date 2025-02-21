@@ -40,10 +40,11 @@ Your dataset should be structured as follows:
 
 | Gene  | Variant ID | Beta | SE Beta | Mod\_1 | Mod\_2 | Mod\_3 | ... |
 | ----- | ---------- | ---- | ------- | ------ | ------ | ------ | --- |
-| Gene1 | v1         | 0.2  | 0.1     | 1.2    | 0.9    | 0.7    | ... |
-| Gene1 | v2         | 0.4  | 0.15    | 0.8    | 1.0    | 1.1    | ... |
-| Gene2 | v3         | 0.3  | 0.2     | 1.5    | 1.3    | 0.6    | ... |
-| Gene2 | v4         | 0.5  | 0.25    | 1.1    | 0.7    | 1.2    | ... |
+| Gene1 | G1         | 0.2  | 0.1     | 1.2    | 0.5    | 1.0   | ... |
+| Gene1 | G2         | -0.5  | 0.2    | 0.8    | 0.3    | 0.7    | ... |
+| Gene2 | G3         | 1.3  | 0.15     | 1.1    | 0.6    | 0.8    | ... |
+| Gene2 | G4         | 0.7  | 0.05    | 0.9    | 0.4    | 0.9   | ... |
+
 
 ### **3. Compute Proportions**
 
@@ -61,23 +62,27 @@ prop_red = uv.proportion_variance_explained_per_gene(df, fitted_values_full,"Mod
 ```python
 uv.plot_proportion_variance_explained(df, fitted_values_full,"matplotlib" , ['Gene1', 'Gene2'])
 ```
-![Variance Explained Matplotlib bar plot](images/output_plt.png)
+<img src="images/output_plt.png" alt="Variance Explained Matplotlib bar plot" width="400">
 
 ```python
 uv.plot_proportion_variance_explained(df, fitted_values_full,"seaborn" , ['Gene1', 'Gene2'])
 ```
-![Variance Explained Seaborn bar plot](images/output_sns.png)
+<img src="images/output_sns.png" alt="Variance Explained Seaborn bar plot" width="400">
 
 <!-- ```python
 uv.sns2_proportion_variance_explained(df, fitted_values_full)
 ```
+<<<<<<< HEAD
 ![Variance Explained Seaborn bar plot inversed ](images/output_sns2.png) -->
+=======
+<img src="images/output_sns2.png" alt="Variance Explained Seaborn bar plot inversed" width="400">
+>>>>>>> 244ec3678439450012011896520d9ea97897db30
 
 ```python
 uv.plot_proportion_variance_explained(df, fitted_values_full,"plotly" , ['Gene1', 'Gene2'])
 ```
+<img src="images/output_plotly.png" alt="Variance Explained Plotly bar plot inversed" width="400">
 
-![Variance Explained Plotly bar plot ](images/output_plotly.png)
 
 ## **Methods & Equations**
 
