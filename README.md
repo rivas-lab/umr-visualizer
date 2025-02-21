@@ -46,18 +46,21 @@ Your dataset should be structured as follows:
 | Gene2 | G4         | 0.7  | 0.05    | 0.9    | 0.4    | 0.9   | ... |
 
 
+**Application** : The dataset is now filtered specifically for the ABOP gene across all files from the directory:
+/scratch/groups/mrivas/larissaredo/prepped_files .  Additional details on the dataset size and preprocessing could be found on from test_package.ipynb
+
+
 ### **3. Compute Proportions**
 
 ```python
 # Define moderators
 moderators = ["Mod_1", "Mod_2", "Mod_3"]
-
+```
 # Compute proportions of variance explained example per moderator for a collection of genes
 prop_red = uv.proportion_variance_explained_per_gene(df, fitted_values_full,"Mod1", ['Gene1', 'Gene2'])
 
 
-
-### **4. Plot Proportions explained for a list genes **
+### **4. Plot Proportions explained for a list genes**
 
 ```python
 uv.plot_proportion_variance_explained(df, fitted_values_full,"matplotlib" , ['Gene1', 'Gene2'])
@@ -68,15 +71,6 @@ uv.plot_proportion_variance_explained(df, fitted_values_full,"matplotlib" , ['Ge
 uv.plot_proportion_variance_explained(df, fitted_values_full,"seaborn" , ['Gene1', 'Gene2'])
 ```
 <img src="images/output_sns.png" alt="Variance Explained Seaborn bar plot" width="400">
-
-<!-- ```python
-uv.sns2_proportion_variance_explained(df, fitted_values_full)
-```
-<<<<<<< HEAD
-![Variance Explained Seaborn bar plot inversed ](images/output_sns2.png) -->
-=======
-<img src="images/output_sns2.png" alt="Variance Explained Seaborn bar plot inversed" width="400">
->>>>>>> 244ec3678439450012011896520d9ea97897db30
 
 ```python
 uv.plot_proportion_variance_explained(df, fitted_values_full,"plotly" , ['Gene1', 'Gene2'])
@@ -123,7 +117,10 @@ The package follows the **meta-regression framework**:
 
 ```
 meta_regression_viz/
+
 │
+├── images/
+│   ├── output.png         # Image examples 
 ├── meta_regression_viz/
 │   ├── __init__.py         # Package initializer
 │   ├── stats.py            # Functions for computing SST, SSR, and proportions
@@ -133,6 +130,7 @@ meta_regression_viz/
 ├── README.md               # Documentation
 ├── LICENSE                 # License file
 ├── requirements.txt        # List of dependencies
+├── test_package.ipynb       # Example Update
 └── .gitignore              # Ignore unnecessary files
 ```
 
