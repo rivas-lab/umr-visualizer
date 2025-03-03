@@ -133,6 +133,6 @@ def proportion_variance_explained_per_gene(table, fitted_values, mod, gene_filte
   
         gene_prop = r_squared_j / r_squared_full
 
-        results.append({'gene': gene, 'Proportion_Variance_Explained': gene_prop})
+        results.append({'gene': gene, 'Proportion_Variance_Explained': gene_prop, 'R_squared_reduced' : r_squared_j})
     
     return pd.DataFrame(results) 

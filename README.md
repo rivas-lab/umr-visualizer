@@ -72,6 +72,15 @@ uv.plot_proportion_variance_explained(df, fitted_values_full,"seaborn" , ['Gene1
 ```
 <img src="images/output_sns.png" alt="Variance Explained Seaborn bar plot" width="400">
 
+<!-- ```python
+uv.sns2_proportion_variance_explained(df, fitted_values_full)
+```
+<<<<<<< HEAD
+![Variance Explained Seaborn bar plot inversed ](images/output_sns2.png) -->
+=======
+<img src="images/output_sns.png" alt="Variance Explained Seaborn bar plot inversed" width="400">
+>>>>>>> 244ec3678439450012011896520d9ea97897db30
+
 ```python
 uv.plot_proportion_variance_explained(df, fitted_values_full,"plotly" , ['Gene1', 'Gene2'])
 ```
